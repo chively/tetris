@@ -8,5 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/New Scene.unity
+    guid: 505b559171b850847ac879c53f67152b
+  - enabled: 1
+    path: Assets/Scenes/stopgame.unity
+    guid: 7c2be614cffcdd44bad00f5b9fb80bbe
   m_configObjects: {}
-  m_UseUCBPForAssetBundles: 0

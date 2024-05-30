@@ -374,6 +374,11 @@
 -analyzer:"/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+"Assets/Scripts/New Folder/menu.cs"
+"Assets/Scripts/Stage background.cs"
+"Assets/Scripts/Stage Item.cs"
+"Assets/Scripts/Stage make.cs"
+"Assets/Scripts/Stage stop.cs"
 "Assets/Scripts/Stage.cs"
 "Assets/Scripts/Tile.cs"
 -langversion:9.0
