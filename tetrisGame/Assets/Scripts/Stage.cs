@@ -236,7 +236,7 @@ public class Stage : MonoBehaviour
 
         } else { // item 2 
             // 속도 증가 기능 구현
-            
+            StartCoroutine(DbScoreSec(30f));
         }
     }
 
@@ -249,6 +249,17 @@ public class Stage : MonoBehaviour
 
         adder = 1;
         itemActived = false;
+    }
+
+    IEnumerator SpeedUp(float duration)
+    {
+        itemActived = true;
+        Time.timeScale = 5;
+
+        yield return new WaitForSeconds(duration);
+
+        nextFallTime = Time.time + fallCycle;
+        Time.timeScale = 1;
     }
 
     // 보드에 완성된 행이 있으면 삭제
