@@ -68,6 +68,7 @@ public partial class Stage : MonoBehaviour
 
             case ItemType.SpeedUp:
                 Debug.Log("속도 증가");
+                itemActived = true;
                 speedUpEndTime = Time.time + 175f;
                 Time.timeScale = 7;
                 moveCycle = 0.7f;
