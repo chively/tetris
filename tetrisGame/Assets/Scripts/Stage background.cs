@@ -149,7 +149,7 @@ public partial class Stage : MonoBehaviour
 
                 foreach (Transform tile in column)
                 {
-                    if(tile.GetComponent<Tile>().color==Color.white) {
+                    if(tile.GetComponent<Tile>().color==Color.white && !itemActived) {
                         Destroy(tile.gameObject);
                         GetScore(2);
                         GrantItem();

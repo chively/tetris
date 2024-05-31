@@ -15,6 +15,8 @@ public partial class Stage : MonoBehaviour
     public GameObject gameoverPanel;
     public GameObject stop;
     public Text text;
+    public Slider doubleTimeSlider; // 슬라이더 추가
+    public Text sliderText;
     int score = 0;
     
     int changenum = 0;
@@ -48,6 +50,8 @@ public partial class Stage : MonoBehaviour
     public bool isItem = false;
     public bool itemActived = false;
 
+    
+
     public void Start()
     {
         gameoverPanel.SetActive(false);
@@ -67,6 +71,9 @@ public partial class Stage : MonoBehaviour
 
         // 아이템 UI 초기화
         itemIcon.enabled = false;
+        // 슬라이더 아이콘 숨기기
+        doubleTimeSlider.gameObject.SetActive(false);
+        sliderText.gameObject.SetActive(false);
 
         for (int i = 0; i < boardHeight; ++i)
         {
@@ -108,13 +115,15 @@ public partial class Stage : MonoBehaviour
     }
 
     // 점수 두배 아이템 효과 시간 체크
-    if (itemActived && currentItem == ItemType.DoubleScore && Time.time >= doubleScoreEndTime)
+    if (itemActived && currentItem == ItemType.DoubleScore && Time.time > doubleScoreEndTime)
     {
         Debug.Log("30초 지남");
         itemActived = false;
+        doubleTimeSlider.gameObject.SetActive(false); // 30초 후 슬라이더 숨기기
+        sliderText.gameObject.SetActive(false);
         currentItem = ItemType.None;
         itemIcon.enabled = false; 
-    }
+    } else if (itemActived && Time.time <= doubleScoreEndTime) {doubleTimeSlider.value = doubleScoreEndTime - Time.time;Debug.Log(Time.time);}
 
 
     // 이동 입력 처리

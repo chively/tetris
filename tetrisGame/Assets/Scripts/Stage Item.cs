@@ -43,6 +43,14 @@ public partial class Stage : MonoBehaviour
                 Debug.Log("2배 아이템 발동 시작");
                 itemActived = true;
                 doubleScoreEndTime = Time.time + 30f; // 30초간 점수 두배
+
+                // 슬라이더 세팅
+                doubleTimeSlider.maxValue = 30f;
+                doubleTimeSlider.value = 30f;
+                doubleTimeSlider.gameObject.SetActive(true);
+                sliderText.gameObject.SetActive(true);
+
+
                 break;
 
             case ItemType.ClearRows:
@@ -51,7 +59,6 @@ public partial class Stage : MonoBehaviour
                 break;
         }
 
-        currentItem = ItemType.None;
         itemIcon.enabled = false; // 아이템 아이콘 숨기기
     }
 
