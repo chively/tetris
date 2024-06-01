@@ -36,6 +36,7 @@ public partial class Stage : MonoBehaviour
         } else if (itemnum == 2){
             currentItem = ItemType.SpeedUp;
             itemIcon.sprite = speedUpSprite;
+            UseItem(); // 속도 증가 획득 즉시 발동
         }
         itemIcon.enabled = true; // 아이템 아이콘 표시
         Debug.Log("item icon 나옴");
@@ -43,7 +44,7 @@ public partial class Stage : MonoBehaviour
 
     void UseItem()
     {
-        if (currentItem == ItemType.None) return;
+        if (currentItem == ItemType.None || itemActived) return;
 
         switch (currentItem)
         {
@@ -69,7 +70,7 @@ public partial class Stage : MonoBehaviour
             case ItemType.SpeedUp:
                 Debug.Log("속도 증가");
                 itemActived = true;
-                speedUpEndTime = Time.time + 175f;
+                speedUpEndTime = Time.time + 175f; // 75f
                 Time.timeScale = 7;
                 moveCycle = 0.7f;
                 repeatDelay = 2.1f;
@@ -78,6 +79,7 @@ public partial class Stage : MonoBehaviour
 
         itemIcon.enabled = false; // 아이템 아이콘 숨기기
     }
+
 
     void ClearBottomRows(int rows)
     {
@@ -96,4 +98,3 @@ public partial class Stage : MonoBehaviour
         ClearRows();
     }
 }
-
