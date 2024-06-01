@@ -125,6 +125,18 @@ public partial class Stage : MonoBehaviour
         itemIcon.enabled = false; 
     } else if (itemActived && Time.time <= doubleScoreEndTime) {doubleTimeSlider.value = doubleScoreEndTime - Time.time;Debug.Log(Time.time);}
 
+     // 속도 증가 아이템 효과 시간 체크
+    if (itemActived && currentItem == ItemType.SpeedUp && Time.time > speedUpEndTime)
+    {
+        Debug.Log("25초 지남");
+        itemActived = false;
+        Time.timeScale = 1;
+        currentItem = ItemType.None;
+        itemIcon.enabled = false;
+        moveCycle = 0.1f;
+        repeatDelay = 0.3f;
+        speedUpEndTime = 0f;
+    }
 
     // 이동 입력 처리
     if (Input.GetKey(KeyCode.LeftArrow) && Time.time >= nextMoveTime)
