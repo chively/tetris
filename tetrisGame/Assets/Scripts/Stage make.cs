@@ -238,7 +238,7 @@ public partial class Stage : MonoBehaviour
     // 테트로미노 생성
     void CreateTetromino()
     {   
-        if(Random.Range(0,10) < 5 && itemActived == false) { // 10%로 아이템을 포함한 테트로미노 생성 && itemActived==false
+        if(Random.Range(0,10) < 5 && itemActived == false) { // 50%로 아이템을 포함한 테트로미노 생성 && itemActived==false
             isItem = true;
         }
        
