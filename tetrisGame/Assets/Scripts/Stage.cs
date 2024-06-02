@@ -14,9 +14,13 @@ public partial class Stage : MonoBehaviour
     public Transform hold;
     public GameObject gameoverPanel;
     public GameObject stop;
-    public Text text;
+    public GameObject scoreobject;
+    public GameObject nameinput;
+    public Text scoretext;
     public Slider doubleTimeSlider; // 슬라이더 추가
     public Text sliderText;
+    public Text gameoverscore;
+    public Text overname;
     int score = 0;
     
     int changenum = 0;
@@ -56,6 +60,7 @@ public partial class Stage : MonoBehaviour
     {
         gameoverPanel.SetActive(false);
         stop.SetActive(false);
+        scoreobject.SetActive(true);
         SetText();
         halfWidth = Mathf.RoundToInt(boardWidth * 0.5f);
         halfHeight = Mathf.RoundToInt(boardHeight * 0.5f);
@@ -94,13 +99,7 @@ public partial class Stage : MonoBehaviour
 
     void Update()
 {
-    if (gameoverPanel.activeSelf)
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        }
-    }
+    
 
     UpdateGhostTetromino(); // 고스트 블록 업데이트
 
@@ -109,7 +108,7 @@ public partial class Stage : MonoBehaviour
     bool isClockwise = true;
 
     // 스페이스바 입력 처리
-    if (Input.GetKeyDown(KeyCode.Space))
+    if (Input.GetKeyDown(KeyCode.Space) && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         UseItem();
     }
@@ -125,27 +124,15 @@ public partial class Stage : MonoBehaviour
         itemIcon.enabled = false; 
     } else if (itemActived && Time.time <= doubleScoreEndTime) {doubleTimeSlider.value = doubleScoreEndTime - Time.time;Debug.Log(Time.time);}
 
-     // 속도 증가 아이템 효과 시간 체크
-    if (itemActived && currentItem == ItemType.SpeedUp && Time.time > speedUpEndTime)
-    {
-        Debug.Log("25초 지남");
-        itemActived = false;
-        Time.timeScale = 1;
-        currentItem = ItemType.None;
-        itemIcon.enabled = false;
-        moveCycle = 0.1f;
-        repeatDelay = 0.3f;
-        speedUpEndTime = 0f;
-    }
 
     // 이동 입력 처리
-    if (Input.GetKey(KeyCode.LeftArrow) && Time.time >= nextMoveTime)
+    if (Input.GetKey(KeyCode.LeftArrow) && Time.time >= nextMoveTime && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         moveDir.x = -1;
         nextMoveTime = Time.time + moveCycle;
         nextRepeatTime = Time.time + repeatDelay; // 초기 지연 시간 설정
     }
-    else if (Input.GetKey(KeyCode.RightArrow) && Time.time >= nextMoveTime)
+    else if (Input.GetKey(KeyCode.RightArrow) && Time.time >= nextMoveTime && gameoverPanel.activeSelf == false && stop.activeSelf  == false)
     {
         moveDir.x = 1;
         nextMoveTime = Time.time + moveCycle;
@@ -153,42 +140,42 @@ public partial class Stage : MonoBehaviour
     }
 
     // 빠르게 반복하는 이동 처리
-    if (Input.GetKey(KeyCode.LeftArrow) && Time.time >= nextRepeatTime)
+    if (Input.GetKey(KeyCode.LeftArrow) && Time.time >= nextRepeatTime && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         moveDir.x = -1;
         nextRepeatTime = Time.time + moveCycle;
     }
-    else if (Input.GetKey(KeyCode.RightArrow) && Time.time >= nextRepeatTime)
+    else if (Input.GetKey(KeyCode.RightArrow) && Time.time >= nextRepeatTime && gameoverPanel.activeSelf == false && stop.activeSelf  == false)
     {
         moveDir.x = 1;
         nextRepeatTime = Time.time + moveCycle;
     }
 
     // 회전 입력 처리
-    if (Input.GetKeyDown(KeyCode.C))
+    if (Input.GetKeyDown(KeyCode.C) && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         isRotate = true;
         isClockwise = true; // 시계 방향 회전
     }
-    else if (Input.GetKeyDown(KeyCode.Z))
+    else if (Input.GetKeyDown(KeyCode.Z) && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         isRotate = true;
         isClockwise = false; // 반시계 방향 회전
     }
-    else if (Input.GetKey(KeyCode.DownArrow) && Time.time >= nextMoveTime)
+    else if (Input.GetKey(KeyCode.DownArrow) && Time.time >= nextMoveTime && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         moveDir.y = -1;
         nextMoveTime = Time.time + moveCycle;
     }
 
-    if (Input.GetKeyDown(KeyCode.UpArrow))
+    if (Input.GetKeyDown(KeyCode.UpArrow) && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         while (MoveTetromino(Vector3.down, false))
         {
         }
     }
 
-    if (Input.GetKeyDown(KeyCode.Q))
+    if (Input.GetKeyDown(KeyCode.Q) && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
         if (dohold == false)
         {
@@ -196,7 +183,13 @@ public partial class Stage : MonoBehaviour
         }
     }
 
-    if (Input.GetKeyDown(KeyCode.Escape))
+    if (Input.GetKeyDown(KeyCode.Return) && nameinput.activeSelf && gameoverPanel.activeSelf == true && stop.activeSelf == false) 
+    {
+       addscore();
+       nameinput.SetActive(false);
+    }
+
+    if (Input.GetKeyDown(KeyCode.Escape) && gameoverPanel.activeSelf == false && stop.activeSelf == false)
         {
             nextFallTime = 60000000000000000;
             stop.SetActive(true);
@@ -242,6 +235,9 @@ public partial class Stage : MonoBehaviour
             if (!CanMoveTo(tetrominoNode))
             {
                 gameoverPanel.SetActive(true);
+                scoreobject.SetActive(false);
+                overscorechange();
+                nextFallTime = 60000000000000000;
             }
         }
 
@@ -308,6 +304,6 @@ public partial class Stage : MonoBehaviour
     
     public void SetText()
     {
-        text.text = score.ToString();
+        scoretext.text = score.ToString();
     }
 }
