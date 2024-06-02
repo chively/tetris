@@ -124,6 +124,7 @@ public partial class Stage : MonoBehaviour
         itemIcon.enabled = false; 
     } else if (itemActived && Time.time <= doubleScoreEndTime) {doubleTimeSlider.value = doubleScoreEndTime - Time.time;Debug.Log(Time.time);}
 
+
     // 속도 증가 아이템 효과 시간 체크
     if (itemActived && currentItem == ItemType.SpeedUp && Time.time > speedUpEndTime && gameoverPanel.activeSelf == false && stop.activeSelf == false)
     {
