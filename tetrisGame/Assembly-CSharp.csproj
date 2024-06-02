@@ -65,6 +65,8 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.2.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Stage gameover.cs" />
+    <Compile Include="Assets\Scripts\New Folder\ranking.cs" />
     <Compile Include="Assets\Scripts\Stage.cs" />
     <Compile Include="Assets\Scripts\New Folder\menu.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />

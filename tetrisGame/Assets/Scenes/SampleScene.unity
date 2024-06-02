@@ -3600,6 +3600,9 @@ MonoBehaviour:
   doubleScoreSprite: {fileID: 21300000, guid: 52a2df2f6cb7b40a8b251dbed2ac130a, type: 3}
   clearRowsSprite: {fileID: 8051021094582106706, guid: 05274e02c7b974c56934628cea233049,
     type: 3}
+  speedUpSprite: {fileID: 1140187925954183906, guid: 9365e6547a0a1fd4baf406a398d048c6,
+    type: 3}
+  itemnum: 0
   tilePrefab: {fileID: 8898468410266244867, guid: f465b7d8698584fa7a723a810626b908,
     type: 3}
   ghostTilePrefab: {fileID: 8898468410266244867, guid: f465b7d8698584fa7a723a810626b908,
